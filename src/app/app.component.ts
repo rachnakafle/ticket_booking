@@ -6,27 +6,27 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
-  total_amount: any;
+export class AppComponent implements OnInit {
+  total_amount: number = 1500;
   title = 'events_form';
-  total_tickets: any;
+  total_tickets: number = 1;
 
   ngOnInit(): void {
-    this.totalTicketAmount();
+    // this.totalTicketAmount();
   }
   constructor() {}
 
   eventsForm = new FormGroup({});
 
-  changeTicketNo(e:any){
+  changeTicketNo(e: any) {
     console.log(e.target.value);
-    this.total_tickets = e.target.value;
-  } 
-
-  totalTicketAmount() {
-    this.total_amount = (this.total_tickets * 1500);
-    console.log(this.total_amount);
-    
+    this.total_tickets = parseInt(e.target.value);
+    this.total_amount = this.total_tickets * 1500;
   }
- 
+
+  // totalTicketAmount() {
+  //   this.total_amount = this.total_tickets * 1500;
+  //   debugger;
+  //   console.log(this.total_amount);
+  // }
 }
