@@ -57,11 +57,7 @@
                 class="form-select"
                 formControlName="noOfTickets"
               >
-                <option selected="" [value]="1">1</option>
-                <option [value]="2">2</option>
-                <option [value]="3">3</option>
-                <option [value]="4">4</option>
-                <option [value]="5">5</option>
+                <option *ngFor="let item of ticket_list"  [value]="item.id">{{item.text}}</option>
               </select>
             </div>
             <h6 class="mt-3">Total Amt. Rs.{{ total_amount }}</h6>

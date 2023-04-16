@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { BookTicketService } from './services/book-ticket.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,13 @@ export class AppComponent implements OnInit {
   total_amount: number = 1500;
   title = 'events_form';
   total_tickets: number = 1;
+  ticket_list: any;
 
   ngOnInit(): void {
     // this.totalTicketAmount();
+    this.getAllTickets();
   }
-  constructor() {}
+  constructor(private _bookTicket: BookTicketService) {}
 
   eventsForm = new FormGroup({});
 
@@ -24,9 +27,15 @@ export class AppComponent implements OnInit {
     this.total_amount = this.total_tickets * 1500;
   }
 
-  // totalTicketAmount() {
-  //   this.total_amount = this.total_tickets * 1500;
-  //   debugger;
-  //   console.log(this.total_amount);
-  // }
+  getAllTickets() {
+    this._bookTicket.getAll().subscribe({
+      next: (x: any) => {
+        console.log(x);
+        this.ticket_list = x.data;
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 }
